@@ -72,3 +72,9 @@ jobs:
           cd ${{ env.Path_ArtifactsBenchmarking }}
           pwd
           ls
+
+      - uses: dtinth/markdown-report-action@v1
+        with:
+          name: Benchmarking .NET 10 X SQL Server 2025
+          title: Benchmarking .NET 10 X SQL Server 2025 - ADO, Dapper, Dapper.Contrib, EF Core e Stored Procedures
+          body-file: ${{ env.Path_ArtifactsBenchmarking }}/${{ env.ArtifactBenchmarkingMarkdown }}
