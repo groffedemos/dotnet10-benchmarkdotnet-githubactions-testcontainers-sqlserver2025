@@ -8,6 +8,13 @@ on:
 
   workflow_dispatch:
 
+env:
+  Path_Tests: './src/BenchmarkingDapperEFCoreCRMSqlServer'
+  Path_ArtifactsBenchmarking: '/src/BenchmarkingDapperEFCoreCRMSqlServer/BenchmarkDotNet.Artifacts/results'
+  ArtifactBenchmarkingHtml: 'BenchmarkingDapperEFCoreCRMSqlServer.Tests.CRMTests-report.html'
+  ArtifactBenchmarkingMarkdown: 'BenchmarkingDapperEFCoreCRMSqlServer.Tests.CRMTests-report-github.md'
+  NoContatosPorCompanhia: '2'
+
 jobs:
   benchmark:
     runs-on: ubuntu-latest
@@ -15,5 +22,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Exibir versoes instaladas do .NET SDK
+        run: |
+          echo '*** SDKs do .NET instalados ***'
+          dotnet --list-sdks
+          echo '*** Versão assumida como default para o .NET ***'
+          dotnet --version
+
+      - name: Setup .NET 9.0.300
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.300'
+
+      - name: Exibir versoes instaladas do .NET SDK (parte 2)
+        run: |
+          echo '*** SDKs do .NET instalados ***'
+          dotnet --list-sdks
+          echo '*** Versão assumida como default para o .NET ***'
+          dotnet --version
