@@ -69,6 +69,6 @@ jobs:
 
       - name: Exibir arquivos gerados como resultado dos testes
         run: |
-          cd ${{ github.workspace }}${{ env.Path_ArtifactsBenchmarking }}
+          cd ${{ env.Path_ArtifactsBenchmarking }}
           pwd
           ls
