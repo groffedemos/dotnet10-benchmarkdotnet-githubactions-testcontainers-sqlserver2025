@@ -40,3 +40,35 @@ jobs:
           dotnet --list-sdks
           echo '*** Versão assumida como default para o .NET ***'
           dotnet --version
+
+      - name: Exibir configuracao com o numero de Contatos a serem criados por Empresa/Companhia
+        run: |
+          echo 'No. de Contatos a serem criados para cada registro de Empresa/Companhia:'
+          echo ''
+          echo ${{ env.NoContatosPorCompanhia }}
+          echo ''
+
+      - name: Executar benchmarking com testes de performance comparando alternativas
+        run: |
+          cd ${{ env.Path_Tests }}
+          echo '*** Arquivos no diretorio do projeto ***'
+          pwd
+          echo ''
+          ls
+          echo ''
+          echo 'Iniciando a execucao dos testes...'
+          echo ''
+          dotnet run --filter BenchmarkingDapperEFCoreCRMSqlServer.Tests.* -c Release
+        env:
+          NumeroContatosPorCompanhia: ${{ env.NoContatosPorCompanhia }}
+
+      - name: Exibir containers apos 20 segundos
+        run: |
+          sleep 20s
+          docker ps -a
+
+      - name: Exibir arquivos gerados como resultado dos testes
+        run: |
+          cd ${{ github.workspace }}${{ env.Path_ArtifactsBenchmarking }}
+          pwd
+          ls
